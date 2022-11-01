@@ -3,7 +3,7 @@
 const { BadRequestError } = require('../../errors');
 
 const app = require('./firebaseConfig')
-const { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } = require('firebase/auth')
+const { getAuth, createUserWithEmailAndPassword, updateProfile } = require('firebase/auth')
 
 const auth = getAuth();
 
@@ -26,15 +26,6 @@ module.exports.userSignup = async (models,body) => {
     }
     catch(error){
       throw new BadRequestError(error);
-    }
-    //console.log("Current user", auth.currentUser)
-    if(auth.currentUser.emailVerified == false){
-      try{
-        await sendEmailVerification(auth.currentUser)
-       }
-       catch(error){
-         throw new BadRequestError(error)
-       }
     }
     
 

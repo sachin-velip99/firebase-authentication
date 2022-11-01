@@ -46,16 +46,6 @@ class UserController extends BaseController {
       this.respondWithError(err);
     }
   }
-
-  async passwordReset() {
-    try {
-      const payload = await userAction.passwordReset(this.models, this.reqBody);
-      this.respondWithSuccess(payload);
-    } catch (err) {
-      console.log(err);
-      this.respondWithError(err);
-    }
-  }
 }
 
 module.exports.UserController = {
@@ -70,8 +60,5 @@ module.exports.UserController = {
   },
   homePage: async (req, res) => {
     return new UserController(req, res).homePage();
-  },
-  passwordReset: async (req, res) => {
-    return new UserController(req, res).passwordReset();
   },
 };
